@@ -59,7 +59,7 @@ func MakeFriends(s service.Service) http.HandlerFunc {
 		}
 
 		name1, name2, errF := s.MakeFriends(req.TargetId, req.SourceId)
-		resp := MakeFriendsResponse{
+		resp := BaseResponse{
 			Message: name1 + " и " + name2 + " теперь друзья",
 		}
 		if errF != nil {
@@ -98,7 +98,7 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 			return
 		}
 		name, errF := s.DelUser(req.UserId)
-		resp := DeleteFriendResponse{
+		resp := BaseResponse{
 			Message: name + " удален ",
 		}
 		if errF != nil {

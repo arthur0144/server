@@ -4,9 +4,6 @@ type CreateResponse struct {
 	Id int `json:"id"`
 }
 
-type MakeFriendsResponse struct {
-	Message string `json:"message"`
-}
-type DeleteFriendResponse struct {
+type BaseResponse struct {
 	Message string `json:"message"`
 }
