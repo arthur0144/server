@@ -10,7 +10,6 @@ import (
 
 func Create(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		reqBody, err := io.ReadAll(r.Body)
 		if err != nil {
 			response(w, http.StatusInternalServerError, []byte(err.Error()))
@@ -39,7 +38,6 @@ func Create(s service.Service) http.HandlerFunc {
 
 func GetAll(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		resp := []byte(s.GetAllUsers())
 		response(w, http.StatusOK, resp)
 	}
@@ -47,7 +45,6 @@ func GetAll(s service.Service) http.HandlerFunc {
 
 func MakeFriends(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		reqBody, err := io.ReadAll(r.Body)
 		if err != nil {
 			response(w, http.StatusInternalServerError, []byte(err.Error()))
@@ -88,7 +85,6 @@ func MakeFriends(s service.Service) http.HandlerFunc {
 
 func DeleteUser(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-
 		reqBody, err := io.ReadAll(r.Body)
 		if err != nil {
 			response(w, http.StatusInternalServerError, []byte(err.Error()))

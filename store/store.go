@@ -58,6 +58,7 @@ func (s *Store) GetAll() (res string) {
 	}
 	return
 }
+
 func (s *Store) GetUserById(id int) (*User, error) {
 	for idUs, user := range *s {
 		if id == idUs {
