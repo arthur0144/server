@@ -9,12 +9,10 @@ import (
 
 	"server/handler"
 	"server/service"
-	"server/store"
 )
 
 func main() {
-	s := make(store.Store)
-	srv := service.NewService(s)
+	srv := service.NewService()
 
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)

@@ -5,6 +5,7 @@ Content-Type: application/json
   "name": "петя",
   "age": 28
 }
+
 ###
 POST {{host}}:{{port}}/makeFriends
 Content-Type: application/json
@@ -13,6 +14,7 @@ Content-Type: application/json
   "source_id": 2,
   "target_id": 1
 }
+
 ###
 DELETE {{host}}:{{port}}/user
 Content-Type: application/json
@@ -21,6 +23,7 @@ Content-Type: application/json
   "user_id": 1
 
 }
+
 ###
 GET {{host}}:{{port}}/getAll
 Accept: application/json

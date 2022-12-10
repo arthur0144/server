@@ -1,6 +1,8 @@
 package service
 
 import (
+	"log"
+
 	"server/store"
 )
 
@@ -8,9 +10,9 @@ type Service struct {
 	store store.Store
 }
 
-func NewService(s store.Store) Service {
+func NewService() Service {
 	return Service{
-		store: s,
+		store: store.NewStore(),
 	}
 }
 
@@ -32,8 +34,8 @@ func (s *Service) MakeFriends(id1, id2 int) (name1, name2 string, err error) {
 	if err != nil {
 		return "", "", err
 	}
-	user1.MakeFriends(id2)
-	user2.MakeFriends(id1)
+	user1.AddFriend(id2)
+	user2.AddFriend(id1)
 	return user1.Name(), user2.Name(), nil
 }
 
@@ -42,14 +44,17 @@ func (s *Service) DeleteUser(id int) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer s.store.DeleteUser(id)
+	s.store.DeleteUser(id)
+
 	friends := user.GetFriends()
-	for _, u := range friends {
-		user, _ := s.store.GetUserById(u)
-		err := user.DeleteFriend(id)
+	for _, fid := range friends {
+		u, err := s.store.GetUserById(fid)
 		if err != nil {
-			return "", err
+			log.Printf("can't get friend id=%d of user with id=%d", fid, id)
+			continue
 		}
+		u.DeleteFriend(id)
 	}
+
 	return user.Name(), nil
 }
