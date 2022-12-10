@@ -1,0 +1,144 @@
+package handler
+
+import (
+	"encoding/json"
+	"io"
+	"net/http"
+	"server/service"
+	"strconv"
+)
+
+func Create(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		reqBody, err := io.ReadAll(r.Body)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		defer r.Body.Close()
+
+		var req CreateRequest
+		if err := json.Unmarshal(reqBody, &req); err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		var resp CreateResponse
+		resp.Id = s.CreateUser(req.Name, req.Age)
+
+		data, err := json.Marshal(resp)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		response(w, http.StatusCreated, data)
+	}
+}
+
+func GetAll(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		resp := []byte(s.GetAllUsers())
+		response(w, http.StatusOK, resp)
+	}
+}
+
+func MakeFriends(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		reqBody, err := io.ReadAll(r.Body)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		defer r.Body.Close()
+
+		var req MakeFriendsRequest
+		if err := json.Unmarshal(reqBody, &req); err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		name1, name2, errF := s.MakeFriends(req.TargetId, req.SourceId)
+		resp := MakeFriendsResponse{
+			Message: name1 + " и " + name2 + " теперь друзья",
+		}
+		if errF != nil {
+			resp.Message = errF.Error()
+			data, err := json.Marshal(resp)
+			if err != nil {
+				response(w, http.StatusInternalServerError, []byte(err.Error()))
+				return
+			}
+			response(w, http.StatusBadRequest, data)
+			return
+		}
+
+		data, err := json.Marshal(resp)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		response(w, http.StatusOK, data)
+	}
+}
+
+func DeleteUser(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+
+		reqBody, err := io.ReadAll(r.Body)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		defer r.Body.Close()
+
+		var req DeleteUs
+		if err := json.Unmarshal(reqBody, &req); err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		name, errF := s.DelUser(req.UserId)
+		resp := DeleteFriendResponse{
+			Message: name + " удален ",
+		}
+		if errF != nil {
+			resp.Message = errF.Error()
+			data, err := json.Marshal(resp)
+			if err != nil {
+				response(w, http.StatusInternalServerError, []byte(err.Error()))
+				return
+			}
+			response(w, http.StatusBadRequest, data)
+			return
+		}
+
+		data, err := json.Marshal(resp)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		response(w, http.StatusOK, data)
+	}
+}
+
+func GetFriends(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		id, err := strconv.Atoi(r.URL.Query().Get("id"))
+		if err != nil || id < 1 {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		resp := []byte(s.GetAllUsers())
+		response(w, http.StatusOK, resp)
+	}
+}
+
+func response(w http.ResponseWriter, statusCode int, resp []byte) {
+	w.WriteHeader(statusCode)
+	_, _ = w.Write(resp)
+}
