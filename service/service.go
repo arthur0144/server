@@ -37,16 +37,16 @@ func (s *Service) MakeFriends(id1, id2 int) (name1, name2 string, err error) {
 	return user1.Name(), user2.Name(), nil
 }
 
-func (s *Service) DelUser(idUs int) (string, error) {
-	user, err := s.store.GetUserById(idUs)
+func (s *Service) DeleteUser(id int) (string, error) {
+	user, err := s.store.GetUserById(id)
 	if err != nil {
 		return "", err
 	}
-	defer s.store.DeleteUser(idUs)
+	defer s.store.DeleteUser(id)
 	friends := user.GetFriends()
 	for _, u := range friends {
 		user, _ := s.store.GetUserById(u)
-		err := user.DeleteFriend(idUs)
+		err := user.DeleteFriend(id)
 		if err != nil {
 			return "", err
 		}

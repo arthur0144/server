@@ -97,7 +97,7 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 			response(w, http.StatusInternalServerError, []byte(err.Error()))
 			return
 		}
-		name, errF := s.DelUser(req.UserId)
+		name, errF := s.DeleteUser(req.UserId)
 		resp := BaseResponse{
 			Message: name + " удален ",
 		}
