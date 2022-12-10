@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"io"
 	"net/http"
+
 	"server/service"
-	"strconv"
 )
 
 func Create(s service.Service) http.HandlerFunc {
@@ -124,13 +124,9 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 
 func GetFriends(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		id, err := strconv.Atoi(r.URL.Query().Get("id"))
-		if err != nil || id < 1 {
-			response(w, http.StatusInternalServerError, []byte(err.Error()))
-			return
-		}
-		resp := []byte(s.GetAllUsers())
-		response(w, http.StatusOK, resp)
+		// TODO: раскомментировать и использовать этот id, чтобы получить друзей и написать ответ
+		// id := chi.URLParam(r, "id")
+		response(w, http.StatusOK, []byte("success"))
 	}
 }
 

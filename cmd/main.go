@@ -19,7 +19,7 @@ func main() {
 	r.Post("/create", handler.Create(srv))
 	r.Post("/makeFriends", handler.MakeFriends(srv))
 	r.Get("/getAll", handler.GetAll(srv))
-	r.Get("/friends/user_id", handler.GetFriends(srv))
+	r.Get("/friends/{id}", handler.GetFriends(srv))
 	r.Delete("/user", handler.DeleteUser(srv))
 
 	err := http.ListenAndServe("localhost:8080", r)

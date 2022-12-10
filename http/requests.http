@@ -27,3 +27,7 @@ Content-Type: application/json
 ###
 GET {{host}}:{{port}}/getAll
 Accept: application/json
+
+###
+GET {{host}}:{{port}}/friends/1
+Accept: application/json
