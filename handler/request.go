@@ -10,6 +10,6 @@ type MakeFriendsRequest struct {
 	TargetId int `json:"target_Id"`
 }
 
-type DeleteUs struct {
+type DeleteUserRequest struct {
 	UserId int `json:"user_id"`
 }

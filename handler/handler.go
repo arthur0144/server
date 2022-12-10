@@ -92,7 +92,7 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 		}
 		defer r.Body.Close()
 
-		var req DeleteUs
+		var req DeleteUserRequest
 		if err := json.Unmarshal(reqBody, &req); err != nil {
 			response(w, http.StatusInternalServerError, []byte(err.Error()))
 			return
