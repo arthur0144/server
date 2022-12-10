@@ -2,8 +2,11 @@ package handler
 
 import (
 	"encoding/json"
+	"fmt"
+	"github.com/go-chi/chi"
 	"io"
 	"net/http"
+	"strconv"
 
 	"server/service"
 )
@@ -125,8 +128,11 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 func GetFriends(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		// TODO: раскомментировать и использовать этот id, чтобы получить друзей и написать ответ
-		// id := chi.URLParam(r, "id")
-		response(w, http.StatusOK, []byte("success"))
+		id := chi.URLParam(r, "id")
+		req, _ := strconv.Atoi(id)
+		res, _ := s.GetAllUserFriends(req)
+		fmt.Println(res)
+		response(w, http.StatusOK, []byte(res))
 	}
 }
 

@@ -2,7 +2,7 @@ POST {{host}}:{{port}}/create
 Content-Type: application/json
 
 {
-  "name": "петя",
+  "name": "коля",
   "age": 28
 }
 

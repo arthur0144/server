@@ -58,3 +58,20 @@ func (s *Service) DeleteUser(id int) (string, error) {
 
 	return user.Name(), nil
 }
+
+func (s *Service) GetAllUserFriends(id int) (res string, err error) {
+	user, err := s.store.GetUserById(id)
+	if err != nil {
+		return "", err
+	}
+	friends := user.GetFriends()
+	for _, fid := range friends {
+		u, err := s.store.GetUserById(fid)
+		if err != nil {
+			log.Printf("can't get friend id=%d of user with id=%d", fid, id)
+			continue
+		}
+		res += u.ToString()
+	}
+	return
+}

@@ -18,7 +18,7 @@ func NewUser(name string, age int) User {
 	}
 }
 
-func (u *User) toString() string {
+func (u *User) ToString() string {
 	return fmt.Sprintf("Name is %s , Age %d is , friends %d and Id: %d\n", u.name, u.age, u.friends, u.id)
 }
 
@@ -70,7 +70,7 @@ func (s *Store) Put(u User) (id int) {
 
 func (s *Store) GetAll() (res string) {
 	for _, u := range s.users {
-		res += u.toString()
+		res += u.ToString()
 	}
 	return
 }
