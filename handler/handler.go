@@ -2,7 +2,6 @@ package handler
 
 import (
 	"encoding/json"
-	"fmt"
 	"io"
 	"net/http"
 	"strconv"
@@ -128,12 +127,62 @@ func DeleteUser(s service.Service) http.HandlerFunc {
 
 func GetFriends(s service.Service) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// TODO: раскомментировать и использовать этот id, чтобы получить друзей и написать ответ
 		id := chi.URLParam(r, "id")
-		req, _ := strconv.Atoi(id)
-		res, _ := s.GetAllUserFriends(req)
-		fmt.Println(res)
+		req, err := strconv.Atoi(id)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		res, err := s.GetAllUserFriends(req)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
 		response(w, http.StatusOK, []byte(res))
+	}
+}
+
+func UpdateAge(s service.Service) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		reqBody, err := io.ReadAll(r.Body)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+		defer r.Body.Close()
+
+		id := chi.URLParam(r, "id")
+		idReq, _ := strconv.Atoi(id)
+
+		var age AgeRequest
+		if err := json.Unmarshal(reqBody, &age); err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		text, errA := s.UpdateAge(idReq, age.UserAge)
+		resp := BaseResponse{
+			Message: text,
+		}
+		if errA != nil {
+			resp.Message = errA.Error()
+			data, err := json.Marshal(resp)
+			if err != nil {
+				response(w, http.StatusInternalServerError, []byte(err.Error()))
+				return
+			}
+			response(w, http.StatusBadRequest, data)
+			return
+		}
+
+		data, err := json.Marshal(resp)
+		if err != nil {
+			response(w, http.StatusInternalServerError, []byte(err.Error()))
+			return
+		}
+
+		response(w, http.StatusOK, data)
+
 	}
 }
 

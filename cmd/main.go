@@ -21,6 +21,7 @@ func main() {
 	r.Get("/getAll", handler.GetAll(srv))
 	r.Get("/friends/{id}", handler.GetFriends(srv))
 	r.Delete("/user", handler.DeleteUser(srv))
+	r.Put("/{id}", handler.UpdateAge(srv))
 
 	err := http.ListenAndServe("localhost:8080", r)
 	if err != nil {

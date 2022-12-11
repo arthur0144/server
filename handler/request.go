@@ -13,3 +13,7 @@ type MakeFriendsRequest struct {
 type DeleteUserRequest struct {
 	UserId int `json:"user_id"`
 }
+
+type AgeRequest struct {
+	UserAge int `json:"user_age"`
+}

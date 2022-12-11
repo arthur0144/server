@@ -26,6 +26,10 @@ func (u *User) Name() string {
 	return u.name
 }
 
+func (u *User) Age(a int) {
+	u.age = a
+}
+
 func (u *User) GetFriends() []int {
 	return u.friends
 }

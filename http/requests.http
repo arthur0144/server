@@ -2,7 +2,7 @@ POST {{host}}:{{port}}/create
 Content-Type: application/json
 
 {
-  "name": "коля",
+  "name": "rоля",
   "age": 28
 }
 
@@ -30,3 +30,12 @@ Accept: application/json
 ###
 GET {{host}}:{{port}}/friends/1
 Accept: application/json
+###
+
+PUT {{host}}:{{port}}/1
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+###
