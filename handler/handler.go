@@ -100,7 +100,7 @@ func GetFriends(s service.Service) http.HandlerFunc {
 		}
 
 		var resp BaseResponse
-		resp.Message, err = s.GetAllUserFriends(req)
+		resp.Message, err = s.GetUserFriends(req)
 		if err != nil {
 			response400(w, err)
 			return
@@ -129,12 +129,11 @@ func UpdateAge(s service.Service) http.HandlerFunc {
 			return
 		}
 
-		var resp BaseResponse
-		resp.Message, err = s.UpdateAge(req, age.UserAge)
+		err = s.UpdateAge(req, age.UserAge)
 		if err != nil {
 			response400(w, err)
 			return
 		}
-		response(w, http.StatusOK, resp)
+		response(w, http.StatusOK, BaseResponse{"возраст пользователя успешно обновлён"})
 	}
 }

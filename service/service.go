@@ -28,11 +28,11 @@ func (s *Service) GetAllUsers() string {
 func (s *Service) MakeFriends(id1, id2 int) (name1, name2 string, err error) {
 	user1, err := s.store.GetUserById(id1)
 	if err != nil {
-		return "", "", err
+		return
 	}
 	user2, err := s.store.GetUserById(id2)
 	if err != nil {
-		return "", "", err
+		return
 	}
 	user1.AddFriend(id2)
 	user2.AddFriend(id1)
@@ -46,8 +46,7 @@ func (s *Service) DeleteUser(id int) (string, error) {
 	}
 	s.store.DeleteUser(id)
 
-	friends := user.GetFriends()
-	for _, fid := range friends {
+	for _, fid := range user.GetFriends() {
 		u, err := s.store.GetUserById(fid)
 		if err != nil {
 			log.Printf("can't get friend id=%d of user with id=%d", fid, id)
@@ -59,13 +58,13 @@ func (s *Service) DeleteUser(id int) (string, error) {
 	return user.Name(), nil
 }
 
-func (s *Service) GetAllUserFriends(id int) (res string, err error) {
+func (s *Service) GetUserFriends(id int) (res string, err error) {
 	user, err := s.store.GetUserById(id)
 	if err != nil {
 		return
 	}
-	friends := user.GetFriends()
-	for _, fid := range friends {
+
+	for _, fid := range user.GetFriends() {
 		u, err := s.store.GetUserById(fid)
 		if err != nil {
 			log.Printf("can't get friend id=%d of user with id=%d", fid, id)
@@ -76,12 +75,11 @@ func (s *Service) GetAllUserFriends(id int) (res string, err error) {
 	return
 }
 
-func (s *Service) UpdateAge(id, age int) (res string, err error) {
+func (s *Service) UpdateAge(id, age int) error {
 	user, err := s.store.GetUserById(id)
 	if err != nil {
-		return
+		return err
 	}
 	user.Age(age)
-	res = "возраст пользователя успешно обновлён"
-	return
+	return nil
 }
