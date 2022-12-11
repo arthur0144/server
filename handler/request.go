@@ -14,6 +14,6 @@ type DeleteUserRequest struct {
 	UserId int `json:"user_id"`
 }
 
-type AgeRequest struct {
+type UpdateAgeRequest struct {
 	UserAge int `json:"user_age"`
 }

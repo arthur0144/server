@@ -15,16 +15,21 @@ func main() {
 	srv := service.NewService()
 
 	r := chi.NewRouter()
-	r.Use(middleware.Logger)
-	r.Post("/create", handler.Create(srv))
-	r.Post("/makeFriends", handler.MakeFriends(srv))
-	r.Get("/getAll", handler.GetAll(srv))
-	r.Get("/friends/{id}", handler.GetFriends(srv))
-	r.Delete("/user", handler.DeleteUser(srv))
-	r.Put("/{id}", handler.UpdateAge(srv))
+	registerRoutes(r, srv)
 
 	err := http.ListenAndServe("localhost:8080", r)
 	if err != nil {
 		fmt.Printf("can't start http server: %s\n", err.Error())
 	}
+}
+
+func registerRoutes(r *chi.Mux, s service.Service) {
+	r.Use(middleware.Logger)
+
+	r.Post("/create", handler.Create(s))
+	r.Post("/makeFriends", handler.MakeFriends(s))
+	r.Get("/getAll", handler.GetAll(s))
+	r.Get("/friends/{id}", handler.GetFriends(s))
+	r.Delete("/user", handler.DeleteUser(s))
+	r.Put("/user/{id}", handler.UpdateAge(s))
 }
