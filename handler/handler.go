@@ -2,6 +2,7 @@ package handler
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -50,6 +51,11 @@ func MakeFriends(s service.Service) http.HandlerFunc {
 		var req MakeFriendsRequest
 		if err := json.Unmarshal(reqBody, &req); err != nil {
 			response500(w, err)
+			return
+		}
+
+		if req.SourceId == req.TargetId {
+			response400(w, errors.New("пользователь не может добавить в друзья самого себя"))
 			return
 		}
 

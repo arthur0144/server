@@ -19,7 +19,7 @@ func NewUser(name string, age int) User {
 }
 
 func (u *User) ToString() string {
-	return fmt.Sprintf("Name is %s , Age %d is , friends %d and Id: %d\n", u.name, u.age, u.friends, u.id)
+	return fmt.Sprintf("Name is %s , Age %d is , friends %d and Id: %d", u.name, u.age, u.friends, u.id)
 }
 
 func (u *User) Name() string {
