@@ -3,10 +3,11 @@ package service
 import (
 	"log"
 
-	"server/store"
+	"server/internal/store"
+	"server/internal/user"
 )
 
-type UserService interface {
+type ServiceInterface interface {
 	CreateUser(name string, age int) int
 	GetAllUsers() string
 	MakeFriends(id1, id2 int) (name1, name2 string, err error)
@@ -16,7 +17,7 @@ type UserService interface {
 }
 
 type Service struct {
-	store store.UserStore
+	store store.StoreInterface
 }
 
 func NewService() *Service {
@@ -26,7 +27,7 @@ func NewService() *Service {
 }
 
 func (s *Service) CreateUser(name string, age int) int {
-	u := store.NewUser(name, age)
+	u := user.NewUser(name, age)
 	return s.store.Put(u)
 }
 

@@ -1,4 +1,4 @@
-package handler
+package controller
 
 type CreateResponse struct {
 	Id int `json:"id"`

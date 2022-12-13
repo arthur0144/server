@@ -1,3 +1,15 @@
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "Коля",
+  "age": 28
+}
+
+<> 2022-12-13T142831.201.txt
+
+###
+
 GET http://localhost:8080/getAll
 Accept: application/json
 
@@ -343,11 +355,6 @@ Content-Type: application/json
 }
 
 <> 2022-12-11T191641.201.txt
-
-###
-
-GET http://localhost:8080/friends/1
-Accept: application/json
 
 ###
 

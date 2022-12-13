@@ -1,4 +1,4 @@
-package handler
+package controller
 
 type CreateRequest struct {
 	Name string `json:"name"`
