@@ -11,25 +11,34 @@ import (
 	"server/internal/service"
 )
 
-func Run() {
+type App struct {
+	router *chi.Mux
+}
+
+func NewApp() *App {
+	return &App{
+		router: chi.NewRouter(),
+	}
+}
+
+func (a *App) Run() {
 	srv := service.NewService()
 
-	r := chi.NewRouter()
-	registerRoutes(r, srv)
+	a.registerRoutes(srv)
 
-	err := http.ListenAndServe("localhost:8080", r)
+	err := http.ListenAndServe("localhost:8080", a.router)
 	if err != nil {
 		fmt.Printf("can't start http server: %s\n", err.Error())
 	}
 }
 
-func registerRoutes(r *chi.Mux, s service.ServiceInterface) {
-	r.Use(middleware.Logger)
+func (a *App) registerRoutes(s service.ServiceInterface) {
+	a.router.Use(middleware.Logger)
 
-	r.Post("/create", controller.Create(s))
-	r.Post("/makeFriends", controller.MakeFriends(s))
-	r.Get("/getAll", controller.GetAll(s))
-	r.Get("/friends/{id}", controller.GetFriends(s))
-	r.Delete("/user", controller.DeleteUser(s))
-	r.Put("/user/{id}", controller.UpdateAge(s))
+	a.router.Post("/create", controller.Create(s))
+	a.router.Post("/makeFriends", controller.MakeFriends(s))
+	a.router.Get("/getAll", controller.GetAll(s))
+	a.router.Get("/friends/{id}", controller.GetFriends(s))
+	a.router.Delete("/user", controller.DeleteUser(s))
+	a.router.Put("/user/{id}", controller.UpdateAge(s))
 }
