@@ -10,8 +10,8 @@ type Service struct {
 	store store.Store
 }
 
-func NewService() Service {
-	return Service{
+func NewService() *Service {
+	return &Service{
 		store: store.NewStore(),
 	}
 }
