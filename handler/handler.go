@@ -7,9 +7,11 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
+
+	"server/service"
 )
 
-func Create(s UserService) http.HandlerFunc {
+func Create(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqBody, err := readBody(r)
 		if err != nil {
@@ -30,7 +32,7 @@ func Create(s UserService) http.HandlerFunc {
 	}
 }
 
-func GetAll(s UserService) http.HandlerFunc {
+func GetAll(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var resp BaseResponse
 		resp.Message = s.GetAllUsers()
@@ -38,7 +40,7 @@ func GetAll(s UserService) http.HandlerFunc {
 	}
 }
 
-func MakeFriends(s UserService) http.HandlerFunc {
+func MakeFriends(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqBody, err := readBody(r)
 		if err != nil {
@@ -69,7 +71,7 @@ func MakeFriends(s UserService) http.HandlerFunc {
 	}
 }
 
-func DeleteUser(s UserService) http.HandlerFunc {
+func DeleteUser(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqBody, err := readBody(r)
 		if err != nil {
@@ -95,7 +97,7 @@ func DeleteUser(s UserService) http.HandlerFunc {
 	}
 }
 
-func GetFriends(s UserService) http.HandlerFunc {
+func GetFriends(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		req, err := strconv.Atoi(chi.URLParam(r, "id"))
 		if err != nil {
@@ -113,7 +115,7 @@ func GetFriends(s UserService) http.HandlerFunc {
 	}
 }
 
-func UpdateAge(s UserService) http.HandlerFunc {
+func UpdateAge(s service.UserService) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		reqBody, err := readBody(r)
 		if err != nil {

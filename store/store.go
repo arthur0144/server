@@ -4,6 +4,23 @@ import (
 	"fmt"
 )
 
+type UserStore interface {
+	Put(u UserInterface) (id int)
+	GetAll() (res string)
+	GetUserById(id int) (UserInterface, error)
+	DeleteUser(id int)
+}
+
+type UserInterface interface {
+	ToString() string
+	Name() string
+	Age(a int)
+	GetFriends() []int
+	AddFriend(id int)
+	DeleteFriend(id int)
+	SetId(id int)
+}
+
 type User struct {
 	id      int
 	name    string
@@ -11,8 +28,8 @@ type User struct {
 	friends []int
 }
 
-func NewUser(name string, age int) User {
-	return User{
+func NewUser(name string, age int) *User {
+	return &User{
 		name: name,
 		age:  age,
 	}
@@ -38,6 +55,10 @@ func (u *User) AddFriend(id int) {
 	u.friends = append(u.friends, id)
 }
 
+func (u *User) SetId(id int) {
+	u.id = id
+}
+
 func (u *User) DeleteFriend(id int) {
 	for i := range u.friends {
 		if u.friends[i] == id {
@@ -49,11 +70,11 @@ func (u *User) DeleteFriend(id int) {
 }
 
 type Store struct {
-	users map[int]*User
+	users map[int]UserInterface
 }
 
-func NewStore() Store {
-	return Store{users: make(map[int]*User)}
+func NewStore() *Store {
+	return &Store{users: make(map[int]UserInterface)}
 }
 
 func (s *Store) nextId() (res int) {
@@ -65,10 +86,10 @@ func (s *Store) nextId() (res int) {
 	return res + 1
 }
 
-func (s *Store) Put(u User) (id int) {
+func (s *Store) Put(u UserInterface) (id int) {
 	id = s.nextId()
-	u.id = id
-	s.users[id] = &u
+	u.SetId(id)
+	s.users[id] = u
 	return id
 }
 
@@ -79,7 +100,7 @@ func (s *Store) GetAll() (res string) {
 	return
 }
 
-func (s *Store) GetUserById(id int) (*User, error) {
+func (s *Store) GetUserById(id int) (UserInterface, error) {
 	u, ok := s.users[id]
 	if !ok {
 		return nil, fmt.Errorf("user id: %d not found", id)

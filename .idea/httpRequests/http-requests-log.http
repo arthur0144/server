@@ -1,0 +1,423 @@
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-13T135821.200.txt
+
+###
+
+PUT http://localhost:8080/user/1
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+
+<> 2022-12-13T135818.400.txt
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+<> 2022-12-13T135815.400.txt
+
+###
+
+DELETE http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "user_id": 1
+}
+
+<> 2022-12-13T135811.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 2,
+  "target_id": 1
+}
+
+<> 2022-12-13T135807.400.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "Коля",
+  "age": 28
+}
+
+<> 2022-12-13T135800.201.txt
+
+###
+
+GET http://localhost:8080/friends/2
+Accept: application/json
+
+<> 2022-12-11T231243.200.txt
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+<> 2022-12-11T231239.400.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T231227.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 2,
+  "target_id": 2
+}
+
+<> 2022-12-11T231221.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 1,
+  "target_id": 1
+}
+
+<> 2022-12-11T231212.400.txt
+
+###
+
+GET http://localhost:8080/friends/2
+Accept: application/json
+
+<> 2022-12-11T231101.200.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T231055.200.txt
+
+###
+
+PUT http://localhost:8080/user/2
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+
+<> 2022-12-11T231051.200.txt
+
+###
+
+PUT http://localhost:8080/user/1
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+
+<> 2022-12-11T231046.400.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T231038.200.txt
+
+###
+
+DELETE http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "user_id": 1
+}
+
+<> 2022-12-11T231035.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 2,
+  "target_id": 1
+}
+
+<> 2022-12-11T231027.200.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "Jоля",
+  "age": 2
+}
+
+<> 2022-12-11T231023.201.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T231007.200.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "Коля",
+  "age": 28
+}
+
+<> 2022-12-11T231000.201.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T230950.200.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T230933.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 3,
+  "target_id": 1
+}
+
+<> 2022-12-11T230924.400.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "Коля",
+  "age": 28
+}
+
+<> 2022-12-11T230912.201.txt
+
+###
+
+PUT http://localhost:8080/user/2
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+
+<> 2022-12-11T220438.400.txt
+
+###
+
+GET http://localhost:8080/getAll
+Accept: application/json
+
+<> 2022-12-11T220423.200.txt
+
+###
+
+PUT http://localhost:8080/user/1
+Content-Type: application/json
+
+{
+  "user_age" : 23
+}
+
+<> 2022-12-11T220418.200.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "rоля",
+  "age": 28
+}
+
+<> 2022-12-11T220413.201.txt
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+<> 2022-12-11T191719.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 3,
+  "target_id": 1
+}
+
+<> 2022-12-11T191715.200.txt
+
+###
+
+POST http://localhost:8080/makeFriends
+Content-Type: application/json
+
+{
+  "source_id": 2,
+  "target_id": 1
+}
+
+<> 2022-12-11T191710.200.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "dоля",
+  "age": 28
+}
+
+<> 2022-12-11T191709.201.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "оля",
+  "age": 28
+}
+
+<> 2022-12-11T191647.201.txt
+
+###
+
+POST http://localhost:8080/create
+Content-Type: application/json
+
+{
+  "name": "коля",
+  "age": 28
+}
+
+<> 2022-12-11T191641.201.txt
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+
+GET http://localhost:8080/friends/1
+Accept: application/json
+
+###
+

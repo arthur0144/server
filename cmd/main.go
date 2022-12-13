@@ -23,7 +23,7 @@ func main() {
 	}
 }
 
-func registerRoutes(r *chi.Mux, s handler.UserService) {
+func registerRoutes(r *chi.Mux, s service.UserService) {
 	r.Use(middleware.Logger)
 
 	r.Post("/create", handler.Create(s))
